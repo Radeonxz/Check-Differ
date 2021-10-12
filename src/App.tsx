@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Layout, Menu } from "antd";
 
-function App() {
+import ContentDiff from "./components/ContentDiff";
+
+const App = () => {
+  const { Footer } = Layout;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Menu>
+        <Menu.Item>JSON Diff</Menu.Item>
+        <Menu.Item>Text Diff</Menu.Item>
+      </Menu>
+      <ContentDiff />
+      <Footer style={{ textAlign: "center" }}>Footer</Footer>
+    </Layout>
   );
-}
+};
 
 export default App;
