@@ -1,7 +1,10 @@
+import { useEffect, useState } from "react";
 import { Button, Select, Input, Form } from "antd";
 
+import ContentDiff from "../ContentDiff";
 import "./styles.css";
 
+const jsDiff = require("diff");
 const FormItem = Form.Item;
 const { TextArea } = Input;
 
@@ -16,19 +19,43 @@ const SeleLayout = {
 };
 
 const InputPanel = () => {
+  const [leftValue, setLeftValue] = useState<string>("abc");
+  const [rightValue, setRightValue] = useState<string>("ab");
+  const [method, setMethod] = useState<string>("");
+  const [diffResults, setDiffResults] = useState([]);
+
+  useEffect(() => {
+    checkDiff();
+  }, []);
+
+  const onChangeInput = (
+    type: string,
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    if (type === "left") setLeftValue(e.target.value);
+    if (type === "right") setRightValue(e.target.value);
+  };
+
+  const checkDiff = () => {
+    const results = jsDiff["diffLines"](leftValue, rightValue);
+    setDiffResults(results);
+  };
+
   return (
     <div className="wrapper">
       <div className="inputWrapper">
         <FormItem {...layout} label="Left" className="input">
           <TextArea
-          // defaultValue={value1}
-          // onChange={this.changInput.bind(null, 0)}
+            style={{ height: 350 }}
+            defaultValue={leftValue}
+            onChange={(e) => onChangeInput("left", e)}
           />
         </FormItem>
         <FormItem {...layout} label="Right" className="input">
           <TextArea
-          // defaultValue={value2}
-          // onChange={this.changInput.bind(null, 1)}
+            style={{ height: 350 }}
+            defaultValue={rightValue}
+            onChange={(e) => onChangeInput("right", e)}
           />
         </FormItem>
       </div>
@@ -44,8 +71,11 @@ const InputPanel = () => {
                             })} */}
           </Select>
         </FormItem>
-        <Button type="primary">Compare</Button>
+        <Button type="primary" onClick={checkDiff}>
+          Compare
+        </Button>
       </div>
+      <ContentDiff diffResults={diffResults} isFile={false} />
       {/* {this.isDirectPatch ? <div className={s.preWrap}>{typeof diffArr === 'string' ? diffArr : ''}</div> : this.isWordType ? this.getCharDiff() : <ContentDiff isFile={this.isFile} diffArr={diffArr}/>} */}
     </div>
   );

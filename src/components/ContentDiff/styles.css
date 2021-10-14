@@ -1,3 +1,21 @@
+.radioGroup {
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  justify-content: flex-end;
+  align-items: center;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.content {
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
 .color {
   color: black;
   background-color: #fff;
@@ -29,12 +47,6 @@
   text-align: center;
   color: brown;
   border: 1px solid brown;
-}
-
-.content {
-  padding-left: 2%;
-  padding-right: 2%;
-  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .outerPre {
@@ -89,7 +101,7 @@
   background-color: #f1f8ff;
 }
 
-.octicon {
+.collapsible-icon {
   fill: currentColor;
 }
 
@@ -102,6 +114,7 @@
 .arrow:hover {
   color: #fff;
   background-color: rgb(3, 102, 214);
+  cursor: pointer;
 }
 
 .cRHeight {
@@ -140,16 +153,6 @@
 
 .filled {
   width: calc(100% - 52px);
-}
-
-.radioGroup {
-  display: flex;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  justify-content: flex-end;
-  align-items: center;
-  padding-left: 2%;
-  padding-right: 2%;
 }
 
 .lBorder {
