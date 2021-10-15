@@ -21,11 +21,12 @@ const SeleLayout = {
 const InputPanel = () => {
   const [leftValue, setLeftValue] = useState<string>("abc");
   const [rightValue, setRightValue] = useState<string>("ab");
-  const [method, setMethod] = useState<string>("");
+  // const [method, setMethod] = useState<string>("");
   const [diffResults, setDiffResults] = useState([]);
 
   useEffect(() => {
     checkDiff();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onChangeInput = (

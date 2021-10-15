@@ -23,6 +23,7 @@ const ContentDiff = ({ diffResults, isFile }: ContentDiffProps) => {
 
   useEffect(() => {
     parseResults(diffResults);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [diffResults]);
 
   useEffect(() => {
@@ -203,13 +204,13 @@ const ContentDiff = ({ diffResults, isFile }: ContentDiffProps) => {
     const {
       type: lType,
       content: lContent,
-      leftPos: lLeftPos,
-      rightPos: lRightPos
-    }: any = leftPart;
+      leftPos: lLeftPos
+    }: // rightPos: lRightPos
+    any = leftPart;
     const {
       type: rType,
       content: rContent,
-      leftPos: rLeftPos,
+      // leftPos: rLeftPos,
       rightPos: rRightPos
     }: any = rightPart;
     const leftArr = lContent?.head || [];
