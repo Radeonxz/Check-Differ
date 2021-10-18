@@ -18,10 +18,18 @@ const SeleLayout = {
   wrapperCol: { span: 10 }
 };
 
+const linesMethods = [
+  "diffLines",
+  "diffTrimmedLines",
+  // "diffSentences",
+  "structuredPatch",
+  "createTwoFilesPatch"
+];
+
 const InputPanel = () => {
   const [leftValue, setLeftValue] = useState<string>("abc");
   const [rightValue, setRightValue] = useState<string>("ab");
-  // const [method, setMethod] = useState<string>("");
+  const [method, setMethod] = useState<string>("diffLines");
   const [diffResults, setDiffResults] = useState([]);
 
   useEffect(() => {
@@ -37,8 +45,12 @@ const InputPanel = () => {
     if (type === "right") setRightValue(e.target.value);
   };
 
+  const onSelectChange = (value: string) => {
+    setMethod(value);
+  };
+
   const checkDiff = () => {
-    const results = jsDiff["diffLines"](leftValue, rightValue);
+    const results = jsDiff[method](leftValue, rightValue);
     setDiffResults(results);
   };
 
@@ -63,13 +75,17 @@ const InputPanel = () => {
       <div className="funWrapper">
         <FormItem {...SeleLayout} label="Methods">
           <Select
-            // defaultValue={method}
+            defaultValue={method}
             style={{ width: 220 }}
-            // onChange={this.handleSelectChange}
+            onChange={onSelectChange}
           >
-            {/* {diffMethod.map((item, index) => {
-                                return <Select.Option key={index} value={item}>{item}</Select.Option>
-                            })} */}
+            {linesMethods.map((item, index) => {
+              return (
+                <Select.Option key={index} value={item}>
+                  {item}
+                </Select.Option>
+              );
+            })}
           </Select>
         </FormItem>
         <Button type="primary" onClick={checkDiff}>
@@ -77,7 +93,6 @@ const InputPanel = () => {
         </Button>
       </div>
       <ContentDiff diffResults={diffResults} isFile={false} />
-      {/* {this.isDirectPatch ? <div className={s.preWrap}>{typeof diffArr === 'string' ? diffArr : ''}</div> : this.isWordType ? this.getCharDiff() : <ContentDiff isFile={this.isFile} diffArr={diffArr}/>} */}
     </div>
   );
 };
