@@ -20,10 +20,10 @@ const SeleLayout = {
 
 const linesMethods = [
   "diffLines",
-  "diffTrimmedLines",
+  "diffTrimmedLines"
   // "diffSentences",
-  "structuredPatch",
-  "createTwoFilesPatch"
+  // "structuredPatch",
+  // "createTwoFilesPatch"
 ];
 
 const InputPanel = () => {
